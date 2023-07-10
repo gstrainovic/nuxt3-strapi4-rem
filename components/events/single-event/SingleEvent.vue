@@ -12,11 +12,8 @@
       <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6">
         <div class="event__speaker">
           <ul>
-            <li>
-              <img :src="img_1" alt="speaker" />
-            </li>
-            <li>
-              <img :src="img_2" alt="speaker" />
+            <li v-for="author in authors" :key="author.id">
+              <img :src="author.attributes.Picture.data.attributes.formats.thumbnail.url" :alt="author.attributes.Name" />
             </li>
           </ul>
           <span>Speaker</span>
@@ -60,9 +57,8 @@ export default {
   mixins: [SalScrollAnimationMixin],
   props:{
     title:String,
-    img_1:String,
-    img_2:String,
+    authors:Array,
     date:String,
   }
-};
+}
 </script>
