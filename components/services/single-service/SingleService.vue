@@ -3,8 +3,8 @@
     <div class="services__item transition-3 mb-30 fix wow fadeInUp" data-sal="slide-up" :data-sal-delay="delay"
       data-sal-duration="1000">
       <div class="services__shape">
-        <img class="services__shape-1" src="~/assets/img/services/shape/services-shape-1.png" alt="" />
-        <img class="services__shape-2" src="~/assets/img/services/shape/services-shape-2.png" alt="" />
+        <!-- <img class="services__shape-1" src="~/assets/img/services/shape/services-shape-1.png" alt="" /> -->
+        <!-- <img class="services__shape-2" src="~/assets/img/services/shape/services-shape-2.png" alt="" /> -->
       </div>
       <div class="services__item-inner">
         <div class="services__icon">

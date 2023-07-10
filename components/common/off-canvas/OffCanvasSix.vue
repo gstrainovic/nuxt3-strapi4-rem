@@ -2,7 +2,7 @@
   <div :class="`offcanvas__area offcanvas__area-1 ${isOffCanvasOpen?'offcanvas-opened':''}`">
       <div class="offcanvas__wrapper">
         <div class="offcanvas__shape">
-            <img class="offcanvas__shape-1" src="~/assets/img/shape/offcanvas-shape-1.png" alt="shape">
+            <!-- <img class="offcanvas__shape-1" src="~/assets/img/shape/offcanvas-shape-1.png" alt="shape"> -->
         </div>
         <div class="offcanvas__close">
             <button @click="closeOffcanvas" class="offcanvas__close-btn offcanvas-close-btn">
@@ -13,7 +13,7 @@
             <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
               <div class="offcanvas__logo logo">
                   <nuxt-link href="/">
-                   <img src="~/assets/img/logo/logo-black.svg" alt="logo">
+                   <!-- <img src="~/assets/img/logo/logo-black.svg" alt="logo"> -->
                   </nuxt-link>
               </div>
             </div>

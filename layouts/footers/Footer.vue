@@ -55,14 +55,14 @@
     </div>
   </footer>
   <!-- image popup start -->
-   <image-popup ref="image_popup" :images="qrcodeImg" />
+   <!-- <image-popup ref="image_popup" :images="qrcodeImg" /> -->
   <!-- image popup end -->
 </template>
 
 <script>
 import ImagePopup from '~~/components/common/modals/ImagePopup.vue';
 import Social from '~~/components/social/Social.vue';
-import qrcode from '~/assets/img/icon/qrcode.png';
+// import qrcode from '~/assets/img/icon/qrcode.png';
 
 export default {
   components: { Social, ImagePopup },

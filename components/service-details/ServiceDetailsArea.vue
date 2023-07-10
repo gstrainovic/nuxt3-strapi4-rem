@@ -153,7 +153,7 @@
             <p>We embrace holistic development and support for employees with the aim of being a first-choice employer within our sectors. Through a unique combination of engineering, construction and design disciplines and expertise.</p>
 
             <div class="services__details-thumb m-img">
-              <img src="~/assets/img/services/details/services-details-img-1.jpg" alt="">
+              <!-- <img src="~/assets/img/services/details/services-details-img-1.jpg" alt=""> -->
             </div>
 
             <div class="services__details-text mb-45">

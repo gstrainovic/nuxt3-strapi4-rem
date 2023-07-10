@@ -2,10 +2,10 @@
   <section
     class="breadcrumb__area breadcrumb__style-7 breadcrumb__bg-3 p-relative z-index-1 include-bg pt-180 pb-100"
   >
-    <div
+    <!-- <div
       class="breadcrumb__bg-shape include-bg"
       :style="{ backgroundImage: `url(${bg})` }"
-    ></div>
+    ></div> -->
     <!-- <div class="breadcrumb__shape">
       <img
         class="breadcrumb__shape-1"
@@ -38,15 +38,15 @@
 </template>
 
 <script>
-import bg from '~/assets/img/breadcrumb/breadcrumb-shape-1.png';
+// import bg from '~/assets/img/breadcrumb/breadcrumb-shape-1.png';
 
 export default {
   props:{
     title:String,
     subtitle:String,
   },
-  data () {
-    return {bg}
-  }
+  // data () {
+  //   return {bg}
+  // }
 };
 </script>
