@@ -66,11 +66,11 @@ import Social from '~~/components/social/Social.vue';
 
 export default {
   components: { Social, ImagePopup },
-  data () {
-    return {
-      qrcodeImg:[qrcode]
-    }
-  },
+  // data () {
+  //   return {
+  //     qrcodeImg:[qrcode]
+  //   }
+  // },
   methods:{
     handleImagePopup(index){
       this.$refs.image_popup.showImg(index);
