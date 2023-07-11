@@ -17,8 +17,6 @@ import { Service } from "~/types/service";
 
 const { locale } = useI18n()
 
-// const strapiUrl = useStrapiUrl().replace('/api', '')
-
 const { data: services } = useAsyncData(
   'services',
   async () => {

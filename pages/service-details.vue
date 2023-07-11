@@ -1,14 +1,14 @@
 <template>
-    <LayoutOne>
-      <service-details-area />
-    </LayoutOne>
+  <LayoutOne>
+    <elements-accordion-main />
+  </LayoutOne>
 </template>
 
 <script setup lang="ts">
 import LayoutOne from '~/layouts/LayoutOne.vue';
-import ServiceDetailsArea from '~~/components/service-details/ServiceDetailsArea.vue';
+import ElementsAccordionMain from '~/elements/elements-accordion/ElementsAccordionMain.vue';
 
 useHead({
-  title: "remmen.io services",
+  title: "Element Accordion - Creative Agency & Portfolio Vue Nuxt 3 Template",
 });
 </script>
