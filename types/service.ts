@@ -17,5 +17,5 @@ export interface ServiceDetail {
   Title: string;
   Description: string;
   Category: string;
-  category_id: string;
+  ctegory_id: string;
 }
