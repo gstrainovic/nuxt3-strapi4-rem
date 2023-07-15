@@ -19,7 +19,7 @@
             <div class="faq__tab tp-tab pr-200">
               <nav>
                 <div class="nav nav-tabs flex-column" id="nav-tab" role="tablist">
-                  <button v-for="(item, index) in accordionItems" :key="index" class="nav-link" :id="'nav-' + item.id + '-tab'" :data-bs-toggle="'tab'" :data-bs-target="'#nav-' + item.id" :type="'button'" :role="'tab'" :aria-controls="'nav-' + item.id" :aria-selected="index === 0">
+                  <button v-for="(item, index) in accordionItems" :key="index" :class="'nav-link' + (index === 0 ? ' active' : '')" :id="'nav-' + item.id + '-tab'" :data-bs-toggle="'tab'" :data-bs-target="'#nav-' + item.id" :type="'button'" :role="'tab'" :aria-controls="'nav-' + item.id" :aria-selected="index === 0">
                     <span>
                       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M7.318 1.74134L2.467 5.52653C1.657 6.1574 1 7.50024 1 8.51863V15.1968C1 17.2877 2.701 19 4.789 19H15.211C17.299 19 19 17.2877 19 15.2058V8.6448C19 7.55431 18.271 6.1574 17.38 5.53554L11.818 1.63319C10.558 0.749983 8.533 0.795045 7.318 1.74134Z" stroke="#525258" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -61,30 +61,43 @@
 </template>
 
 <script setup lang="ts">
-import TabContent from '~~/components/faqs/StartUpFaq/TabContent.vue';
 
-const accordionItems = [
-  {
-    id: 'general',
-    title: 'General Questions',
-    subItems: [
-      {
-        title: 'Global search engine optimization',
-        content: 'A startup or start-up is started by individual founders or entrepreneurs to search for a repeatable and scalable business model. A startup or start-up is started by individual founders...'
-      }
-    ]
-  },
-  {
-    id: 'community',
-    title: 'Community',
-    subItems: [
-      {
-        title: 'What kind of marketing efforts do you specialize in?',
-        content: 'A startup or start-up is started by individual founders or entrepreneurs to search for a repeatable and scalable business model. A startup or start-up is started by individual founders...'
-      }
-    ]
+
+import { Strapi4ResponseData, StrapiLocale } from "@nuxtjs/strapi/dist/runtime/types";
+import { ServiceDetail } from "~/types/service";
+
+const { locale } = useI18n()
+const { find } = useStrapi()
+
+const service_details = await find<ServiceDetail>('service-details', {
+  locale: locale.value as StrapiLocale,
+})
+
+// group service_details by category like this:
+const grouped_service_details: { category: string; items: Strapi4ResponseData<ServiceDetail>[] }[] = service_details.data.reduce((acc: { category: string; items: Strapi4ResponseData<ServiceDetail>[] }[], item: Strapi4ResponseData<ServiceDetail>) => {
+  const category: string = item.attributes.Category
+  const existing_category: { category: string; items: Strapi4ResponseData<ServiceDetail>[] } | undefined = acc.find((i) => i.category === category)
+  if (existing_category) {
+    existing_category.items.push(item)
+  } else {
+    acc.push({ category, items: [item] })
   }
-];
+  return acc
+}, [])
+
+//add category_id like this item.attributes.Category.replace(/[^a-zA-Z0-9]/g, '') on grouped_service_details
+const accordionItems = grouped_service_details.map((item) => {
+  return {
+    id: item.category.replace(/[^a-zA-Z0-9]/g, ''),
+    title: item.category,
+    subItems: item.items.map((subItem) => {
+      return {
+        title: subItem.attributes.Title,
+        content: subItem.attributes.Description
+      }
+    })
+  }
+})
 
 let activeTab = accordionItems[0].id;
 </script>
