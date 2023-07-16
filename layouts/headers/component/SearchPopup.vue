@@ -8,7 +8,7 @@
               class="search__top d-flex justify-content-between align-items-center"
             >
               <div class="search__logo">
-                <nuxt-link href="/">
+                <nuxt-link :to="localePath('/')">
                   <img src="~/assets/img/logo/logo.svg" alt="logo" />
                 </nuxt-link>
               </div>

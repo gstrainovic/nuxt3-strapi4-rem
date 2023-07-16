@@ -17,7 +17,7 @@
         <div class="offcanvas__content">
             <div class="offcanvas__top mb-10 d-flex justify-content-between align-items-center">
               <div class="offcanvas__logo logo">
-                  <nuxt-link href="/">
+                  <nuxt-link :to="localePath('/')">
                    <img src="~/assets/img/logo/logo.svg" alt="logo">
                   </nuxt-link>
               </div>

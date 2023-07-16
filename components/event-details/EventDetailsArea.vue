@@ -104,7 +104,7 @@
                 <div class="col-lg-4">
                   <div class="event__sidebar mt-5 ml-50">
                     <div class="event__widget mb-40">
-                      <h3 class="event__widget-title">About Speaker</h3>
+                      <h3 class="event__widget-title">Speaker</h3>
                       <div class="event__widget-content">
                         <div class="event__speaker-item d-flex">
                           <div class="event__speaker-thumb w-img">

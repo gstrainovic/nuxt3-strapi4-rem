@@ -7,7 +7,7 @@
             <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
               <div class="footer__widget mb-50 footer-col-1">
                 <div class="footer__logo">
-                  <nuxt-link href="/">
+                  <nuxt-link :to="localePath('/')">
                     <img src="~/assets/img/logo/logo.svg" alt="">
                   </nuxt-link>
                 </div>
@@ -29,12 +29,11 @@
                 <h3 class="footer__widget-title">Navigation</h3>
                 <div class="footer__widget-content">
                   <ul>
-                    <li><nuxt-link href="/">Home</nuxt-link></li>
-                    <li><nuxt-link href="/about">About</nuxt-link></li>
-                    <li><nuxt-link href="/services">Service</nuxt-link></li>
-                    <li><a href="#">Testimonials</a></li>
-                    <li><nuxt-link href="/blog-grid">News</nuxt-link></li>
-                    <li><nuxt-link href="/contact">Contact</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/')">Home</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/service-details')">Services</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/event-details')">Events</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/blog-details')">Blog</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/company')">Company</nuxt-link></li>
                   </ul>
                 </div>
               </div>

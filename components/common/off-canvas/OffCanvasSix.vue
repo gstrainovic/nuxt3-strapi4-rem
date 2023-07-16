@@ -12,7 +12,7 @@
         <div class="offcanvas__content">
             <div class="offcanvas__top mb-40 d-flex justify-content-between align-items-center">
               <div class="offcanvas__logo logo">
-                  <nuxt-link href="/">
+                  <nuxt-link :to="localePath('/')">
                    <!-- <img src="~/assets/img/logo/logo-black.svg" alt="logo"> -->
                   </nuxt-link>
               </div>
@@ -27,7 +27,7 @@
             <div class="offcanvas__menu offcanvas__menu-ff-space d-none d-lg-block">
               <nav>
                   <ul>
-                    <li><nuxt-link href="/">Home</nuxt-link></li>
+                    <li><nuxt-link :to="localePath('/')">Home</nuxt-link></li>
                     <li><nuxt-link href="/about">About</nuxt-link></li>
                     <li><nuxt-link href="/services">Service</nuxt-link></li>
                     <li><nuxt-link href="/blog">Blog</nuxt-link></li>

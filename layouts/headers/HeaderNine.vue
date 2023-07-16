@@ -9,7 +9,7 @@
             <div class="row align-items-center">
               <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-4 col-sm-5 col-8">
                 <div class="logo">
-                  <nuxt-link href="/">
+                  <nuxt-link :to="localePath('/')">
                     <img src="~/assets/img/logo/logo.svg" alt="logo">
                   </nuxt-link>
                 </div>

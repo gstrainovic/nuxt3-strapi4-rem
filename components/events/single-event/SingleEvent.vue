@@ -6,7 +6,7 @@
     <div class="row align-items-center">
       <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
         <h3 class="event__title">
-          <nuxt-link :to="'/event-details/' + id">{{title}}</nuxt-link>
+          <nuxt-link :to="localePath('/event-details') + '/' + id">{{title}}</nuxt-link>
         </h3>
       </div>
       <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6">

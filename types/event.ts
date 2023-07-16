@@ -1,3 +1,4 @@
+import { Author } from "./author";
 import { Picture } from "./picture";
 
 export interface Event {
@@ -10,6 +11,9 @@ export interface Event {
     Description: string;
     Price: string;
     SoldOut: string;
+    authors: {
+        data: Author[];
+    };
     Picture: {
         data: Picture;
       },
