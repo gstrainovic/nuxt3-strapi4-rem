@@ -1,5 +1,4 @@
 <template>
-  {{ event }}
   <section class="event__details-area pt-120 pb-65">
     <div class="container">
       <div class="row">
