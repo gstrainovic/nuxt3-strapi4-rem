@@ -23,10 +23,10 @@
             <div class="row align-items-center">
               <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-4 col-sm-5 col-8">
                 <div class="logo logo-border">
-                  <nuxt-link href="/">
+                  <nuxt-link :to="localePath('/')">
                     <img
                       src="~/assets/img/logo/logo4.svg"
-                      alt="logo"
+                      alt="logo2"
                     />
                   </nuxt-link>
                 </div>

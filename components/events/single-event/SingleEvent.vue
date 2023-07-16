@@ -6,7 +6,7 @@
     <div class="row align-items-center">
       <div class="col-xxl-4 col-xl-4 col-lg-4 col-md-6 col-sm-6">
         <h3 class="event__title">
-          <nuxt-link href="/event-details">{{title}}</nuxt-link>
+          <nuxt-link :to="'/event-details/' + id">{{title}}</nuxt-link>
         </h3>
       </div>
       <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-3 col-sm-6">
@@ -26,7 +26,7 @@
       </div>
       <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
         <div class="event__more float-lg-end">
-          <nuxt-link href="/event-details" class="tp-btn-border-pink">
+          <nuxt-link :to="'/event-details/' + id" class="tp-btn-border-pink">
             Buy Tickets
             <svg
               width="6"
@@ -56,6 +56,7 @@ import SalScrollAnimationMixin from "~/mixins/SalScrollAnimationMixin";
 export default {
   mixins: [SalScrollAnimationMixin],
   props:{
+    id:String,
     title:String,
     authors:Array,
     date:String,

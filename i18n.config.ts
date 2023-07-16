@@ -1,14 +1,19 @@
 export default defineI18nConfig(() => ({
-  legacy: false,
-  locale: 'de',
+  locales: ['de-CH', 'en'],
+  defaultLocale: 'de-CH',
+  fallbackLocale: 'de-CH',
+  // strategy: 'prefix_except_default',
   messages: {
     en: {
       welcome: 'Welcome',
-      en: 'English'
+      en: 'English',
+      descriptionEvent: 'Description Event'
     },
     'de-CH': {
       welcome: 'Willkommen',
-      'de-CH': 'Deutsch'
+      'de-CH': 'Deutsch',
+      descriptionEvent: 'Eventbeschreibung'
+
     }
   },
 }))

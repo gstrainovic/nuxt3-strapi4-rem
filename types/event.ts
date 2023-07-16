@@ -1,5 +1,4 @@
-import { Author } from "./author";
-import { Logo } from "./logo";
+import { Picture } from "./picture";
 
 export interface Event {
     id: string;
@@ -11,11 +10,9 @@ export interface Event {
     Description: string;
     Price: string;
     SoldOut: string;
-    authors: {
-        data: [
-            attributes: Author[]
-        ]
-    }
+    Picture: {
+        data: Picture;
+      },
 
 }
 

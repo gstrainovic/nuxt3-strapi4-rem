@@ -1,4 +1,5 @@
 <template>
+  {{ event }}
   <section class="event__details-area pt-120 pb-65">
     <div class="container">
       <div class="row">
@@ -6,9 +7,9 @@
           <div class="event__details-wrapper">
             <div class="event__details-content mb-50">
               <div class="event__details-tag mb-10">
-                <span>Conference</span>
+                <span>{{ event.Type }}</span>
               </div>
-              <h3 class="event__details-title">UX Design Conference</h3>
+              <h3 class="event__details-title">{{ event.Titel }}</h3>
               <div class="event__meta-wrapper event__details-meta mb-55 d-sm-flex flex-wrap align-items-center">
                 <div class="event__meta-item">
                   <span>
@@ -36,7 +37,7 @@
                       <path d="M4.70602 11.2899H4.71231" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
                         stroke-linejoin="round" />
                     </svg>
-                    October 12, 2023
+                    {{event.Date}}
                   </span>
                   <span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -46,7 +47,7 @@
                       <path d="M10.5826 10.2259L8.41256 8.93093C8.03456 8.70693 7.72656 8.16793 7.72656 7.72693V4.85693"
                         stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
-                    11:00am - 12:00pm
+                    {{event.Time}}
                   </span>
                   <span>
                     <svg width="14" height="18" viewBox="0 0 14 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,12 +56,13 @@
                         stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
                         stroke-linejoin="round" />
                     </svg>
-                    Live Stream via Zoom
+                    {{event.Location}}
                   </span>
                 </div>
               </div>
+
               <div class="event__details-thumb m-img mb-60">
-                <img src="~/assets/img/event/details/event-details-1.jpg" alt="">
+                <img :src="event.Picture.data.attributes.url" alt="event">
               </div>
             </div>
             <div class="event__details-inner">
@@ -68,16 +70,10 @@
                 <div class="col-lg-8">
                   <div class="event__details-left pr-35">
                     <div class="event__details-about mb-50">
-                      <h3 class="event__details-about-title">Description Event</h3>
-                      <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question
-                        Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven
-                        versalia, put her initial into the belt and made herself on the way. Lorem ipsum dolor sit amet,
-                        consectetur adipiscing elit, sed do eiusmod.</p>
-                      <p>Far far away, behind the word mountains, far from the countries vokalia and Consonantia, there
-                        live the blind texts. Separated they live in Book marks grove right at the coast of the Semantics,
-                        <br> a large language ocean.</p>
+                      <h3 class="event__details-about-title">{{ $t('descriptionEvent') }}</h3>
+                      <p>{{ event.Description }}</p>
                     </div>
-                    <div class="event__details-quote text-center mb-50">
+                    <!-- <div class="event__details-quote text-center mb-50">
                       <div class="event__details-quote-icon">
                         <span>
                           <svg width="34" height="28" viewBox="0 0 34 28" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +98,7 @@
                         <li>Aenean per Penatibus</li>
                         <li>Sales/Marketing Strategy</li>
                       </ul>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
                 <div class="col-lg-4">
@@ -245,8 +241,19 @@
   </div>
 </section></template>
 
-<script>
-export default {
+<script setup lang="ts">
+import { StrapiLocale } from '@nuxtjs/strapi/dist/runtime/types';
+import { Event } from "~/types/event";
 
-}
+const { id }  = useRoute().params as { id: string }
+const { findOne } = useStrapi()
+const { locale } = useI18n()
+
+const temp = await findOne<Event>('events', id, {
+    locale: locale.value as StrapiLocale,
+    populate: "*"
+  })
+
+const event : Event  = temp.data.attributes
+
 </script>

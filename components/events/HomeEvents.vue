@@ -21,7 +21,7 @@
       <div class="row">
         <div class="col-xxl-12">
           <template v-for="event in  events?.data " :key="event.id">
-            <SingleEvent :authors="event.attributes.authors.data" :title="event.attributes.Titel" :desc="event.attributes.Description" :date="event.attributes.Date"
+            <SingleEvent :id="event.id" :authors="event.attributes.authors.data" :title="event.attributes.Titel" :desc="event.attributes.Description" :date="event.attributes.Date"
             delay ="130" />
           </template>
         </div>
@@ -36,7 +36,6 @@ import SingleEvent from "./single-event/SingleEvent.vue";
 // images
 import { StrapiLocale } from "@nuxtjs/strapi/dist/runtime/types";
 import { Event } from "~/types/event";
-import { Author } from "~/types/author";
 
 const { locale } = useI18n()
 

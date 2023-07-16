@@ -5,7 +5,7 @@
       :key="i"
       :class="`${menu.megaMenu ? 'has-mega-menu' : ''}`"
     >
-      <NuxtLink :to="menu.link" class="menu__link">
+      <NuxtLink :to="localePath(menu.link)" class="menu__link">
         {{ menu.title }}
       </NuxtLink>
     </li>
