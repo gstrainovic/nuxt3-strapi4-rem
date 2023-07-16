@@ -18,7 +18,7 @@
           </p>
 
           <div class="services__btn">
-            <nuxt-link :to="'/service-details' + id" class="tp-btn-border">Explore Section <i
+            <nuxt-link :to="'/service-details/' + id" class="tp-btn-border">Explore Section <i
                 class="fa-regular fa-angle-right"></i>
             </nuxt-link>
           </div>
