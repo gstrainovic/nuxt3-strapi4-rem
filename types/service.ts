@@ -8,8 +8,12 @@ export interface Service {
     data: {
       attributes: Logo;
     }
-  }
-  service_details: ServiceDetail;
+  },
+  service_details: {
+    data: {
+      attributes: ServiceDetail
+    }[];
+  };
 }
 
 export interface ServiceDetail {
@@ -17,5 +21,5 @@ export interface ServiceDetail {
   Title: string;
   Description: string;
   Category: string;
-  ctegory_id: string;
+  category_id: string;
 }

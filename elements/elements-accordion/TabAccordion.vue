@@ -63,20 +63,33 @@
 <script setup lang="ts">
 
 
-import { Strapi4ResponseData, StrapiLocale } from "@nuxtjs/strapi/dist/runtime/types";
-import { ServiceDetail } from "~/types/service";
+import { StrapiLocale } from "@nuxtjs/strapi/dist/runtime/types";
+import { ServiceDetail, Service } from "~/types/service";
 
 const { locale } = useI18n()
-const { find } = useStrapi()
+const { find , findOne} = useStrapi()
 
-const service_details = await find<ServiceDetail>('service-details', {
-  locale: locale.value as StrapiLocale,
-})
+const { id }  = useRoute().params as { id: string }
+
+let service_details: ServiceDetail[] = []
+if (!id) {
+  const { data } = await find<ServiceDetail>('service-details', {
+    locale: locale.value as StrapiLocale,
+  })
+  service_details = data.map((item) => item.attributes)
+} else {
+  const services  = await findOne<Service>('services', id, {
+    locale: locale.value as StrapiLocale,
+    populate: 'service_details'
+  })
+  service_details = services.data.attributes.service_details.data.map((item) => item.attributes)
+  
+}
 
 // group service_details by category like this:
-const grouped_service_details: { category: string; items: Strapi4ResponseData<ServiceDetail>[] }[] = service_details.data.reduce((acc: { category: string; items: Strapi4ResponseData<ServiceDetail>[] }[], item: Strapi4ResponseData<ServiceDetail>) => {
-  const category: string = item.attributes.Category
-  const existing_category: { category: string; items: Strapi4ResponseData<ServiceDetail>[] } | undefined = acc.find((i) => i.category === category)
+const grouped_service_details: { category: string; items: ServiceDetail[] }[] = service_details.reduce((acc: { category: string; items: ServiceDetail[] }[], item: ServiceDetail) => {
+  const category: string = item.Category
+  const existing_category: { category: string; items: ServiceDetail[] } | undefined = acc.find((i) => i.category === category)
   if (existing_category) {
     existing_category.items.push(item)
   } else {
@@ -92,12 +105,12 @@ const accordionItems = grouped_service_details.map((item) => {
     title: item.category,
     subItems: item.items.map((subItem) => {
       return {
-        title: subItem.attributes.Title,
-        content: subItem.attributes.Description
+        title: subItem.Title,
+        content: subItem.Description
       }
     })
   }
 })
 
-let activeTab = accordionItems[0].id;
+let activeTab = accordionItems[0]?.id;
 </script>

@@ -3,7 +3,7 @@
     <div class="container mt-80">
       <div class="row">
         <template v-for="service in services.data" :key="service.id">
-          <SingleService :iconUrl="service.attributes.Logo.data?.attributes?.url" :title="service.attributes.Title" :desc="service.attributes.Description" delay="130" />
+          <SingleService :id="service.id" :iconUrl="service.attributes.Logo.data?.attributes?.url" :title="service.attributes.Title" :desc="service.attributes.Description" delay="130" />
         </template>
       </div>
     </div>
