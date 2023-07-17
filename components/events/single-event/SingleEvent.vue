@@ -16,7 +16,7 @@
               <img :src="author.attributes.Picture.data.attributes.formats.thumbnail.url" :alt="author.attributes.Name" />
             </li>
           </ul>
-          <span>Speaker</span>
+          <span>{{ $t('speaker') }}</span>
         </div>
       </div>
       <div class="col-xxl-2 col-xl-2 col-lg-2 col-md-3 col-sm-6">
@@ -26,8 +26,8 @@
       </div>
       <div class="col-xxl-3 col-xl-3 col-lg-3 col-md-6 col-sm-6">
         <div class="event__more float-lg-end">
-          <nuxt-link :to="'/event-details/' + id" class="tp-btn-border-pink">
-            Buy Tickets
+          <nuxt-link :to="'/checkout/' + id" class="tp-btn-border-pink">
+            {{ $t('buyTickets') }}
             <svg
               width="6"
               height="10"

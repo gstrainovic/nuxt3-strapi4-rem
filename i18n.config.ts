@@ -10,7 +10,9 @@ export default defineI18nConfig(() => ({
       speaker: 'Speaker',
       descriptionEvent: 'Description Event',
       date: 'Date',
-      place: 'Place'
+      place: 'Place',
+      buyTickets: 'Buy Tickets',
+      billingDetails: 'Billing Details',
     },
     'de-CH': {
       welcome: 'Willkommen',
@@ -18,7 +20,10 @@ export default defineI18nConfig(() => ({
       descriptionEvent: 'Eventbeschreibung',
       speaker: 'Sprecher',
       date: 'Datum',
-      place: 'Ort'
+      place: 'Ort',
+      buyTickets: 'Tickets Kaufen',
+      billingDetails: 'Rechnungsdaten',
+
     }
   },
 }))
