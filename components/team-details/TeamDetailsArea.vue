@@ -1,37 +1,32 @@
 <template>
   <section class="team__details-area pt-100 p-relative z-index-1">
     <div class="team__details-shape">
-      <!-- <img class="team__details-shape-1" src="~/assets/img/team/details/team-details-shape-1.png" alt=""> -->
-      <!-- <img class="team__details-shape-2" src="~/assets/img/team/details/team-details-shape-2.png" alt=""> -->
-      <!-- <img class="team__details-shape-3" src="~/assets/img/team/details/team-details-shape-3.png" alt=""> -->
-      <!-- <img class="team__details-shape-4" src="~/assets/img/team/details/team-details-shape-4.png" alt=""> -->
     </div>
     <div class="container">
       <div class="team__details-border">
         <div class="row">
           <div class="col-xl-5 col-md-6">
             <div class="team__details-thumb" data-sal="slide-up" data-sal-delay="130" data-sal-duration="1000">
-              <img src="~/assets/img/team/details/team-details-1.jpg" alt="">
+              <img :src="author.Picture.data.attributes.formats.small.url" :alt="author.Picture.data.attributes.name" />
             </div>
           </div>
           <div class="col-xl-7 col-md-6">
             <div class="team__details-content pt-40 pl-15 pr-50" data-sal="slide-up" data-sal-delay="150" data-sal-duration="1000">
-              <span class="team__details-subtitle">Founder-CO</span>
-              <h3 class="team__details-title">Moira Baxter</h3>
+              <span class="team__details-subtitle">{{ author.Title }}</span>
+              <h3 class="team__details-title">{{author.Name}}</h3>
               <div class="team__details-contact mb-10">
                 <div class="team__details-contact-item d-flex align-items-center">
-                  <!-- for wp if client want to add icon enable it -->
                   <div class="team__details-contact-icon mr-10 d-none">
                     <span>
                       <i class="fa-regular fa-envelope"></i>
                     </span>
                   </div>
                   <div class="team__details-contact-content">
-                    <p><a href="mailto:hello@website.com">hello@website.com</a></p>
+                    <p><a href="mailto:hello@website.com">{{author.email}}</a></p>
                   </div>
                 </div>
               </div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin vulputate pellentesque commodo. Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+              <p>{{ author.Description }}</p>
               <div class="team__details-social">
                 <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
                 <a href="#"><i class="fa-brands fa-twitter"></i></a>
@@ -45,11 +40,19 @@
   </section>
 </template>
 
-<script>
-import SalScrollAnimationMixin from "~/mixins/SalScrollAnimationMixin";
+<script setup lang="ts">
+import { StrapiLocale } from '@nuxtjs/strapi/dist/runtime/types';
+import { Author } from 'types/author';
 
-export default {
-  mixins: [SalScrollAnimationMixin],
+const { id }  = useRoute().params as { id: string }
+const { findOne } = useStrapi()
+const { locale } = useI18n()
 
-}
+const temp = await findOne<Author>('authors', id, {
+    locale: locale.value as StrapiLocale,
+    populate: '*', // populate all relations
+})
+
+const author = temp.data.attributes
+
 </script>

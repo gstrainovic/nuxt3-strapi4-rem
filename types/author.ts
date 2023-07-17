@@ -15,4 +15,11 @@ export interface Author {
             data: Picture;
         };
     };
+    Picture: {
+        data: Picture;
+    };
+    Title?: string;
+    Name?: string;
+    email?: string;
+    Description?: string;
 }
