@@ -1,5 +1,6 @@
 <template>
   <LayoutOne>
+    <HomeJumbotron />
     <elements-accordion-main />
   </LayoutOne>
 </template>

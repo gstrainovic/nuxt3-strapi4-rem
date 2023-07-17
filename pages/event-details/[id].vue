@@ -1,5 +1,6 @@
 <template>
   <LayoutOne>
+    <HomeJumbotron />    
     <event-details-area />
     <back-to-top />
   </LayoutOne>
