@@ -7,13 +7,18 @@ export default defineI18nConfig(() => ({
     en: {
       welcome: 'Welcome',
       en: 'English',
-      descriptionEvent: 'Description Event'
+      speaker: 'Speaker',
+      descriptionEvent: 'Description Event',
+      date: 'Date',
+      place: 'Place'
     },
     'de-CH': {
       welcome: 'Willkommen',
       'de-CH': 'Deutsch',
-      descriptionEvent: 'Eventbeschreibung'
-
+      descriptionEvent: 'Eventbeschreibung',
+      speaker: 'Sprecher',
+      date: 'Datum',
+      place: 'Ort'
     }
   },
 }))

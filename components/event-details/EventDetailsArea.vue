@@ -1,4 +1,5 @@
 <template>
+  {{ event }}
   <section class="event__details-area pt-120 pb-65">
     <div class="container">
       <div class="row">
@@ -103,30 +104,24 @@
                 <div class="col-lg-4">
                   <div class="event__sidebar mt-5 ml-50">
                     <div class="event__widget mb-40">
-                      <h3 class="event__widget-title">Speaker</h3>
+                      <h3 class="event__widget-title">{{ $t('speaker') }}</h3>
                       <div class="event__widget-content">
-                        <div class="event__speaker-item d-flex">
-                          <div class="event__speaker-thumb w-img">
-                            <img src="~/assets/img/users/user-10.jpg" alt="">
+
+
+                        <template v-for="author in event.authors.data" :key="author.Id">
+                          <div class="event__speaker-item d-flex">
+                            <div class="event__speaker-thumb w-img">
+                              <img :src="author.attributes.Picture.data.attributes.formats.thumbnail.url" alt="">
+                            </div>
+                            <div class="event__speaker-content">
+                              <h3 class="event__speaker-title">
+                                <nuxt-link :to="`/team-details/${author.id}`">{{ author.attributes.Name }}</nuxt-link>
+                              </h3>
+                              <span class="event__speaker-designation">{{ author.attributes.Title }}</span>
+                            </div>
                           </div>
-                          <div class="event__speaker-content">
-                            <h3 class="event__speaker-title">
-                              <nuxt-link href="/team-details">Fleece Marigold</nuxt-link>
-                            </h3>
-                            <span class="event__speaker-designation">Host & Speaker</span>
-                          </div>
-                        </div>
-                        <div class="event__speaker-item d-flex">
-                          <div class="event__speaker-thumb w-img">
-                            <img src="~/assets/img/users/user-9.jpg" alt="">
-                          </div>
-                          <div class="event__speaker-content">
-                            <h3 class="event__speaker-title">
-                              <nuxt-link href="/team-details">Max Conversion</nuxt-link>
-                            </h3>
-                            <span class="event__speaker-designation">Speaker</span>
-                          </div>
-                        </div>
+                        </template>
+
                       </div>
                     </div>
                     <div class="event__widget mb-20">
@@ -164,8 +159,8 @@
                               </span>
                             </div>
                             <div class="event__details-info-content">
-                              <h4 class="event__details-info-title">Date</h4>
-                              <p>October 12, 2023</p>
+                              <h4 class="event__details-info-title">{{ $t('date') }}</h4>
+                              <p>{{event.Date + ' ' + event.Time}}</p>
                             </div>
                           </div>
                           <div class="event__details-info-item d-flex align-items-start">
@@ -183,45 +178,10 @@
                               </span>
                             </div>
                             <div class="event__details-info-content">
-                              <h4 class="event__details-info-title">Venue</h4>
-                              <p>Jakarta Garden City Hall, Room C</p>
+                              <h4 class="event__details-info-title">{{ $t('place') }}</h4>
+                              <p>{{event.Location}}</p>
                             </div>
                           </div>
-                          <div class="event__details-info-item d-flex align-items-start">
-                            <div class="event__details-info-icon">
-                              <span>
-                                <svg width="22" height="24" viewBox="0 0 22 24" fill="none"
-                                  xmlns="http://www.w3.org/2000/svg">
-                                <path d="M6.55554 1V4.33333" stroke="currentColor" stroke-width="1.5"
-                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M15.4446 1V4.33333" stroke="currentColor" stroke-width="1.5"
-                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M1.55573 8.8777H20.4446" stroke="currentColor" stroke-width="1.5"
-                                  stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round" />
-                                <path
-                                  d="M21 8.2222V17.6666C21 21 19.3333 23.2222 15.4444 23.2222H6.55556C2.66667 23.2222 1 21 1 17.6666V8.2222C1 4.88886 2.66667 2.66664 6.55556 2.66664H15.4444C19.3333 2.66664 21 4.88886 21 8.2222Z"
-                                  stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round"
-                                  stroke-linejoin="round" />
-                                <path d="M15.1051 14H15.115" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M15.1051 17.3332H15.115" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M10.995 14H11.005" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M10.995 17.3332H11.005" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M6.88258 14H6.89256" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                                <path d="M6.88258 17.3332H6.89256" stroke="currentColor" stroke-width="1.5"
-                                  stroke-linecap="round" stroke-linejoin="round" />
-                              </svg>
-                            </span>
-                          </div>
-                          <div class="event__details-info-content">
-                            <h4 class="event__details-info-title">Date</h4>
-                            <p>October 12, 2023</p>
-                          </div>
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -250,8 +210,8 @@ const { locale } = useI18n()
 
 const temp = await findOne<Event>('events', id, {
     locale: locale.value as StrapiLocale,
-    populate: "*"
-  })
+    populate: ['Picture', 'authors.Picture']
+})
 
 const event : Event  = temp.data.attributes
 
