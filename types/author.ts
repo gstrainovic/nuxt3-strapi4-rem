@@ -1,7 +1,7 @@
 import { Picture } from "./picture";
 
 export interface Author {
-    id: number;
+    id: string;
     attributes: {
         Name: string;
         Title: string;

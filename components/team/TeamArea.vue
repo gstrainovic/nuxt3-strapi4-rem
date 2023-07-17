@@ -1,39 +1,31 @@
 <template>
   <section class="team__area pt-100 pb-40">
     <div class="container">
-      <div v-if="el_style" class="row">
-        <div class="col-xl-12">
-            <div class="tp-section-wrapper-3 mb-50 text-center">
-              <span class="tp-section-subtitle-3">Our Team</span>
-              <h3 class="tp-section-title-3">Team Grid Style</h3>
-            </div>
-        </div>
-      </div>
       <div class="row">
         <div
-          v-for="(item, i) in teamData.filter((t) => t.team_p)"
-          :key="i"
+          v-for="(item) in author" :key="item.id"
           class="col-xl-3 col-lg-3 col-md-4 col-sm-6"
         >
-          <single-team :item="item" :team_p="true" />
+          <single-team :id="item.id" :item="item.attributes"/>
         </div>
       </div>
     </div>
   </section>
 </template>
 
-<script>
-import teamData from "~~/mixins/teamData";
+<script setup lang="ts">
+import { StrapiLocale } from '@nuxtjs/strapi/dist/runtime/types';
+import { Author } from 'types/author';
 import SingleTeam from "./single-team/SingleTeam.vue";
 
-export default {
-  props:{
-    el_style:{
-      type:Boolean,
-      default:false
-    }
-  },
-  components: { SingleTeam },
-  mixins: [teamData],
-};
+const { id }  = useRoute().params as { id: string }
+const { find } = useStrapi()
+const { locale } = useI18n()
+
+const temp = await find<Author>('authors', {
+    locale: locale.value as StrapiLocale,
+    populate: '*', // populate all relations
+})
+
+const author = temp.data
 </script>
