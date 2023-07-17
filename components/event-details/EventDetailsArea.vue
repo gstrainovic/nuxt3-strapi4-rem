@@ -106,8 +106,6 @@
                     <div class="event__widget mb-40">
                       <h3 class="event__widget-title">{{ $t('speaker') }}</h3>
                       <div class="event__widget-content">
-
-
                         <template v-for="author in event.authors.data" :key="author.Id">
                           <div class="event__speaker-item d-flex">
                             <div class="event__speaker-thumb w-img">

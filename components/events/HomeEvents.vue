@@ -20,7 +20,7 @@
       </div>
       <div class="row">
         <div class="col-xxl-12">
-          <template v-for="event in  events?.data " :key="event.id">
+          <template v-for="event in futureEvents" :key="event.id">
             <SingleEvent :id="event.id" :authors="event.attributes.authors.data" :title="event.attributes.Titel" :desc="event.attributes.Description" :date="event.attributes.Date"
             delay ="130" />
           </template>
@@ -50,5 +50,10 @@ const { data: events } = useAsyncData(
     return events
   }
 )
+
+const futureEvents = computed(() => {
+  const currentDate = new Date()
+  return events.value?.data.filter(event => new Date(event.attributes.Date) >= currentDate)
+})
 
 </script>
