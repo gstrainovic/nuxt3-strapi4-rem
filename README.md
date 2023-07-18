@@ -1,4 +1,4 @@
-# New website based on!
+# New website based on!!
 - nuxt3
 - i18n
 - strapi
