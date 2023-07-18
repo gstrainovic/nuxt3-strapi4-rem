@@ -70,7 +70,7 @@
                   <div class="event__details-left pr-35">
                     <div class="event__details-about mb-50">
                       <h3 class="event__details-about-title">{{ $t('descriptionEvent') }}</h3>
-                      <p>{{ event.Description }}</p>
+                      <p v-html="$mdRenderer.render(event.Description)"></p>
                     </div>
                     <!-- <div class="event__details-quote text-center mb-50">
                       <div class="event__details-quote-icon">
@@ -209,6 +209,10 @@ const temp = await findOne<Event>('events', id, {
     locale: locale.value as StrapiLocale,
     populate: ['Picture', 'authors.Picture']
 })
+
+const markdownString = "**Markdwon-it in Nuxt3**"
+
+
 
 const event : Event  = temp.data.attributes
 
