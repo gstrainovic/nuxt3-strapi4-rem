@@ -158,7 +158,7 @@
                   </div>
                   <div class="event__widget">
                     <div class="event__details-btn">
-                      <nuxt-link href="/contact" class="tp-btn w-100">Make an Appointment</nuxt-link>
+                      <nuxt-link :to="localePath('/checkout') + '/' + id" class="tp-btn w-100">Make an Appointment</nuxt-link>
                     </div>
                   </div>
                 </div>
@@ -182,6 +182,8 @@ const mdRenderer = new MarkdownIt()
 const { id }  = useRoute().params as { id: string }
 const { findOne } = useStrapi()
 const { locale } = useI18n()
+
+const localePath = useLocalePath()
 
 const temp = await findOne<Event>('events', id, {
   locale: locale.value as StrapiLocale,
