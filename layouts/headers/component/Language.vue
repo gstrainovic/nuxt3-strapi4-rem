@@ -18,6 +18,7 @@
   top: 10px !important;
   display: flex;
   flex-direction: column;
+  background-color: transparent;
 }
 </style>
 

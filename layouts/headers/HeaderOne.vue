@@ -34,9 +34,7 @@
               <div class="col-xxl-7 col-xl-8 col-lg-8 d-none d-lg-block text-left">
                 <div class="main-menu main-menu-ff-space">
                   <nav id="mobile-menu">
-                    <!-- menus start -->
                     <menus />
-                    <!-- menus end -->
                   </nav>
                 </div>
               </div>
@@ -96,21 +94,6 @@
                       <li class="language-selector">
                          <Language/>
                       </li>
-                      <!--
-                      <li>
-                        <button
-                            @click="handleOffCanvas"
-                            type="button"
-                            :class="`hamburger-btn ${
-                            header_solid || header_black ? 'hamburger-btn-black' : ''
-                          } offcanvas-open-btn`"
-                        >
-                          <span></span>
-                          <span></span>
-                          <span></span>
-                        </button>
-                      </li>
-                      -->
                     </ul>
                   </div>
                   <div class="header__hamburger ml-50 d-xl-none">
@@ -126,29 +109,19 @@
                       <span></span>
                     </button>
                   </div>
-
-
                 </div>
               </div>
-
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- search popup start -->
     <SearchPopup ref="SearchPopup" />
-    <!-- search popup end -->
   </header>
 
-  <!-- off canvas full start -->
   <off-canvas-main ref="off_canvas" v-if="!commonOffcanvas"/>
-  <!-- off canvas full end -->
-
-  <!-- commonOffcanvas start -->
   <off-canvas-six ref="off_canvas" v-if="commonOffcanvas"/>
-  <!-- commonOffcanvas end -->
 </template>
 
 <style>
@@ -166,6 +139,11 @@
   display: flex;
   align-items: center;
 }
+
+/* change u.main-menu ul li a and .header__action ul li a to black */
+/* .main-menu ul li a, .header__action ul li a { */
+  /* color: black; */
+/* } */
 
 .mega-menu-wrapper div {
   height: 100%;
