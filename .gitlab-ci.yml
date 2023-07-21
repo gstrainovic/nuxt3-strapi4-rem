@@ -31,7 +31,7 @@ deploy:
   script: 
     - |
       cd deploy/$CI_COMMIT_REF_NAME
-      kustomize edit set image DUMMY_IMAGE=$REGISTRY/remmen/redesign:$CI_PIPELINE_ID_$CI_COMMIT_REF_NAME
+      kustomize edit set image DUMMY_IMAGE=$REGISTRY/remmen/redesign:${CI_PIPELINE_ID}_${CI_COMMIT_REF_NAME}
   artifacts:
     paths:
       - deploy/$CI_COMMIT_REF_NAME/kustomization.yaml
