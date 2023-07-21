@@ -43,7 +43,9 @@
                 <h3 class="footer__widget-title">Services</h3>
                 <div class="footer__widget-content">
                   <ul>
-
+                    <li v-for="service in services.data" :key="service.id">
+                      <nuxt-link :to="localePath('/service-details') + '/' + service.attributes.Title.toLowerCase()">{{ service.attributes.Title }}</nuxt-link>
+                    </li>
                   </ul>
                 </div>
               </div>
@@ -54,27 +56,23 @@
     </div>
   </footer>
   <!-- image popup start -->
-   <!-- <image-popup ref="image_popup" :images="qrcodeImg" /> -->
+  <!-- <image-popup ref="image_popup" :images="qrcodeImg" /> -->
   <!-- image popup end -->
 </template>
 
-<script>
-import ImagePopup from '~~/components/common/modals/ImagePopup.vue';
-import Social from '~~/components/social/Social.vue';
-// import qrcode from '~/assets/img/icon/qrcode.png';
+<script setup lang="ts">
+import { StrapiLocale } from "@nuxtjs/strapi/dist/runtime/types";
+import SingleService from "./single-service/SingleService.vue";
+import { Service } from "~/types/service";
+const { locale } = useI18n()
+const { find } = useStrapi()
+const localePath = useLocalePath();
 
-export default {
-  components: { Social, ImagePopup },
-  // data () {
-  //   return {
-  //     qrcodeImg:[qrcode]
-  //   }
-  // },
-  methods:{
-    handleImagePopup(index){
-      this.$refs.image_popup.showImg(index);
-    }
-  },
-  }
+const services = await find<Service>('services', {
+  locale: locale.value as StrapiLocale,
+  // populate: '*'
+})
+
+
 </script>
 
