@@ -1,5 +1,7 @@
 stages:
    - build
+   - deploy
+   - commit_to_git
 
 services:
   - docker:20.10.16-dind
