@@ -12,13 +12,42 @@ variables:
   FORCE_COLOR: 1
   EARTHLY_EXEC_CMD: "/bin/sh"
 
-image: earthly/earthly:v0.7.12
-
-before_script:
-    - earthly bootstrap
-    - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $REGISTRY
-
 earthly:
   stage: build
+  image: earthly/earthly:v0.7.12
+
+  before_script:
+      - earthly bootstrap
+      - docker login -u $REGISTRY_USER -p $REGISTRY_PASSWORD $REGISTRY
   script:
     - earthly --ci --push -P +container --tag="${CI_PIPELINE_ID}_${CI_COMMIT_REF_NAME}" --registry="$REGISTRY"
+
+
+deploy:
+  stage: deploy
+  image: remmenio/ci-toolkit
+  script: 
+    - |
+      cd deploy/$CI_COMMIT_REF_NAME
+      ls -al
+      kustomize edit set image DUMMY_IMAGE=$REGISTRY/remmen/redesign:$CI_PIPELINE_ID_$CI_COMMIT_REF_NAME
+  artifacts:
+    paths:
+      - deploy/$CI_COMMIT_REF_NAME/kustomization.yaml
+
+git_push:
+  stage: commit_to_git
+  image: remmenio/ci-toolkit
+  tags:
+    - docker
+  script: 
+    - |
+      git config --global user.email "foo@bar.ch"
+      git config --global user.name "foobar"
+      git add deploy/$CI_COMMIT_REF_NAME/kustomization.yaml
+      if [[ `git commit -a --dry-run -uno --short|wc -l` -gt 0 ]]; then
+        git commit -m "Updated version number from  $CI_COMMIT_SHORT_SHA [skip ci]"
+        git remote rm origin && git remote add origin https://foobar:${GIT_TOKEN}@gitlab.herren5.ch/websites/remmen.git
+      else
+        echo "no changes, nothing to commit in this stage"
+      fi

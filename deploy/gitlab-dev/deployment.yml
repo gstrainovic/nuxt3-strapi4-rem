@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: website-redesign
+  labels:
+    app: remmen
+spec:
+  selector:
+    matchLabels:
+      app: remmen
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: remmen
+    spec:
+      imagePullSecrets:
+        - name: harbor-herren5-ch
+      containers:
+        - name: nginx
+          image: DUMMY_IMAGE
+          resources:
+            limits:
+              memory: 128Mi
+              cpu: 100m
+            requests:
+              memory: 128Mi
+              cpu: 100m
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 30
+          readinessProbe:
+            failureThreshold: 5
+            httpGet:
+              path: /
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 15
+            periodSeconds: 30
