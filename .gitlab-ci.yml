@@ -46,9 +46,6 @@ git_push:
       git config --global user.email "foo@bar.ch"
       git config --global user.name "foobar"
       git add deploy/$CI_COMMIT_REF_NAME/kustomization.yaml
-      if [[ `git commit -a --dry-run -uno --short|wc -l` -gt 0 ]]; then
-        git commit -m "Updated version number from  $CI_COMMIT_SHORT_SHA [skip ci]"
-        git remote rm origin && git remote add origin https://foobar:${GIT_TOKEN}@gitlab.herren5.ch/websites/remmen_redesign.git
-      else
-        echo "no changes, nothing to commit in this stage"
-      fi
+      git commit -m "Updated version number from  $CI_COMMIT_SHORT_SHA [skip ci]"
+      git push -o ci-skip https://foobar:${GIT_TOKEN}@gitlab.herren5.ch/websites/remmen_redesign.git HEAD:$CI_COMMIT_REF_NAME
+    
