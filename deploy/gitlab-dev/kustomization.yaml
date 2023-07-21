@@ -11,4 +11,4 @@ namespace: remmen-website-redesign
 images:
 - name: DUMMY_IMAGE
   newName: harbor.herren5.ch/remmen/redesign
-  newTag: gitlab-dev
+  newTag: 610_gitlab-dev
