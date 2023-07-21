@@ -17,4 +17,4 @@ container:
     FROM nginx:alpine
     COPY +build/.output/public/. /usr/share/nginx/html
     COPY conf/nginx.conf /etc/nginx/nginx.conf
-    SAVE IMAGE harbor.herren5.ch/remmen/website:$tag
+    SAVE IMAGE harbor.herren5.ch/remmen/redesign:$tag
