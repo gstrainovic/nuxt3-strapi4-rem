@@ -14,7 +14,8 @@ build:
 
 container: 
     ARG tag
+    ARG registry
     FROM nginx:alpine
     COPY +build/.output/public/. /usr/share/nginx/html
     COPY conf/nginx.conf /etc/nginx/nginx.conf
-    SAVE IMAGE harbor.herren5.ch/remmen/redesign:$tag
+    SAVE IMAGE --push $registry/remmen/redesign:$tag
