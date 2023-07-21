@@ -185,10 +185,16 @@ const { locale } = useI18n()
 
 const localePath = useLocalePath()
 
-const temp = await findOne<Event>('events', id, {
-  locale: locale.value as StrapiLocale,
-  populate: ['Picture', 'authors.Picture']
-})
+let temp: any
+
+try {
+    temp = await findOne<Event>('events', id, {
+    locale: locale.value as StrapiLocale,
+    populate: ['Picture', 'authors.Picture']
+  });
+} catch (error) {
+  throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
 
 const event : Event  = temp.data.attributes
 

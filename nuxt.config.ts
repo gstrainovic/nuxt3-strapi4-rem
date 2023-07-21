@@ -5,7 +5,7 @@ export default defineNuxtConfig({
       web3FormsKey: process.env.web3FormsKey,
     },
   },
-  ssr: true,
+  ssr: false,
   css: [
     "bootstrap/scss/bootstrap.scss",
     "swiper/css/bundle",

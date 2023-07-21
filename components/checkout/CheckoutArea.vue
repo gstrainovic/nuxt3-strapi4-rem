@@ -7,7 +7,7 @@
     <div class="container">
         <form action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" :value="config.public.web3FormsKey">
-          <input type="hidden" name="eventTitel" :value="event.Titel">
+          <input type="hidden" name="eventTitel" :value="event?.Titel">
         <div class="row">
           <div class="col-lg-6">
             <div class="checkbox-form">
@@ -103,10 +103,10 @@
                   <tbody>
                     <tr class="cart_item">
                       <td class="product-name">
-                        {{ event.Titel }} <strong class="product-quantity"> × 1</strong>
+                        {{ event?.Titel }} <strong class="product-quantity"> × 1</strong>
                       </td>
                       <td class="product-total">
-                        <span class="amount">${{ event.Price }}</span>
+                        <span class="amount">${{ event?.Price }}</span>
                       </td>
                     </tr>
                   </tbody>
@@ -117,7 +117,7 @@
                     </tr>
                     <tr class="order-total">
                       <th>Order Total</th>
-                      <td><strong><span class="amount">${{ event.Price }}</span></strong>
+                      <td><strong><span class="amount">${{ event?.Price }}</span></strong>
                       </td>
                     </tr>
                   </tfoot>
@@ -149,11 +149,14 @@ const { findOne } = useStrapi()
 const { locale } = useI18n()
 const config = useRuntimeConfig()
 
-const temp = await findOne<Event>('events', id, {
-  locale: locale.value as StrapiLocale,
-  populate: ['Picture', 'authors.Picture']
-})
-
-const event: Event = temp.data.attributes
-
+let event: Event | null = null
+try {
+  const temp = await findOne<Event>('events', id, {
+    locale: locale.value as StrapiLocale,
+    populate: ['Picture', 'authors.Picture']
+  })
+  event = temp.data.attributes
+} catch (error) {
+    throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
+}
 </script>
