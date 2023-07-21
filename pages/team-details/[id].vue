@@ -1,5 +1,6 @@
 <template>
   <LayoutOne>
+    <HomeJumbotron />
     <team-details-area />
     <team-details-about />
   </LayoutOne>

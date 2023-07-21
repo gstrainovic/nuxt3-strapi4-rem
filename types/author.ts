@@ -22,4 +22,6 @@ export interface Author {
     Name?: string;
     email?: string;
     Description?: string;
+    Description_Long?: string;
+
 }

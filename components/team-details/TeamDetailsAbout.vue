@@ -6,34 +6,8 @@
           <div class="col-lg-8">
             <div
               class="team__details-about-content"
-              data-sal="slide-up" data-sal-delay="130" data-sal-duration="1000"
             >
-              <h3 class="team__details-about-title">About moira baxter</h3>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit lobortis
-                arcu enim urna adipiscing <br />
-                praesent velit viverra sit semper lorem eu cursus vel hendrerit
-                elementum morbi curabitur etiam <br />
-                nibh justo, lorem aliquet donec sed sit mi dignissim at ante
-                massa mattis.
-              </p>
-
-              <div class="team__details-about-list pt-10 mb-35">
-                <ol>
-                  <li>Neque sodales ut etiam sit amet nisl purus.</li>
-                  <li>Adipiscing elit aliquam purus viverra suspendisse</li>
-                  <li>Mauris commodo quis imperdiet tincidunt</li>
-                  <li>Adipiscing elit ut aliquam purus</li>
-                </ol>
-              </div>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Maecenas varius tortor nibh, sit amet tempor nibh finibus et.
-                Aenean eu enim justo. Vestibulum aliquam hendrerit molestie.
-                Mauris malesuada nisi sit amet augue accumsan tincidunt.
-                Maecenas tincidunt, velit ac porttitor pulvinar, tortor eros
-                facilisis libero, vitae commodo nunc quam et ligula.
-              </p>
+            <p v-html="renderDescription"></p>
             </div>
           </div>
         </div>
@@ -42,10 +16,32 @@
   </div>
 </template>
 
-<script>
-import SalScrollAnimationMixin from "~/mixins/SalScrollAnimationMixin";
+<script setup lang="ts">
+import { StrapiLocale } from '@nuxtjs/strapi/dist/runtime/types';
+import { Author } from 'types/author';
 
-export default {
-  mixins: [SalScrollAnimationMixin],
-};
+const { id }  = useRoute().params as { id: string }
+const { findOne } = useStrapi()
+const { locale } = useI18n()
+
+import MarkdownIt from 'markdown-it'
+const mdRenderer = new MarkdownIt()
+
+
+const { data: author } = useAsyncData(
+  'author',
+  async () => {
+    const temp = await findOne<Author>('authors', id, {
+      locale: locale.value as StrapiLocale,
+      populate: '*', // populate all relations
+    })
+    return temp && temp.data.attributes
+  }
+)
+
+const renderDescription = ref('')
+onMounted(() => {
+  renderDescription.value = mdRenderer.render(author.value?.Description_Long || '')
+})
+
 </script>
