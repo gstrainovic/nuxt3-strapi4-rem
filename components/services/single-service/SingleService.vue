@@ -11,14 +11,14 @@
         </div>
         <div class="services__content">
           <h3 class="services__title">
-            <nuxt-link :to="localePath('/service-details') + '/' + id">{{ title }}</nuxt-link>
+            <nuxt-link :to="localePath('/service-details') + '/' + title.toLowerCase() ">{{ title }}</nuxt-link>
           </h3>
           <p>
             {{ desc }}
           </p>
 
           <div class="services__btn">
-            <nuxt-link :to="localePath('/service-details') + '/' + id" class="tp-btn-border">Explore Section <i
+            <nuxt-link :to="localePath('/service-details') + '/' + title.toLowerCase()" class="tp-btn-border">Explore Section <i
                 class="fa-regular fa-angle-right"></i>
             </nuxt-link>
           </div>

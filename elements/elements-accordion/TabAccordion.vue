@@ -94,12 +94,11 @@ try {
     })
     service_details = data.map((item) => item.attributes)
   } else {
-    const services = await findOne<Service>('services', id, {
+    const { data } = await find<Service>('services', {
       locale: locale.value as StrapiLocale,
-      populate: 'service_details'
+      populate: '*'
     })
-    service_details = services.data.attributes.service_details.data.map((item) => item.attributes)
-
+    service_details = data.filter((item) => item.attributes.Title.toLowerCase().includes(id)).map((item) => item.attributes.service_details.data.map((item) => item.attributes))[0]
   }
 } catch (error) {
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
