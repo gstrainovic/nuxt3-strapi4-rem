@@ -99,6 +99,7 @@ try {
       populate: '*'
     })
     service_details = data.filter((item) => item.attributes.Title.toLowerCase().includes(id)).map((item) => item.attributes.service_details.data.map((item) => item.attributes))[0]
+    if (!service_details) throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
   }
 } catch (error) {
   throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
