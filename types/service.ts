@@ -4,6 +4,8 @@ export interface Service {
   id: string;
   Title: string;
   Description: string;
+  Detail_Titel: string;
+  Detail_Description: string;
   Logo: {
     data: {
       attributes: Logo;

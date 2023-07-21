@@ -5,16 +5,16 @@
         <div class="col-xxl-5 col-xl-5 col-lg-6">
           <div class="faq__wrapper">
             <div class="section__title-wrapper-7 mb-60">
-              <span class="section__title-pre-7">Tab Accordion</span>
-              <h3 class="section__title-7">Accordion <br> with
-                <span class="section__title-7-highlight">
+              <span class="section__title-pre-7">{{ detail_title }}</span>
+              <h3 class="section__title-7">{{ detail_description }}
+                <!-- <span class="section__title-7-highlight">
                   rounded tab
                   <svg width="240" height="22" viewBox="0 0 240 22" fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd"
                       d="M0.440833 21.1152C78.9497 6.16225 158.05 4.53412 235.949 13.8239C237.497 14.0088 239.796 12.4065 239.988 9.93474C240.181 7.4176 238.026 5.44088 236.474 5.2332C157.99 -5.31675 79.1936 0.359501 0.316568 19.7785C-0.184784 19.9023 -0.0511379 21.2092 0.440833 21.1152Z"
                       fill="#2CAE76" />
                   </svg>
-                </span>
+                </span> -->
               </h3>
             </div>
 
@@ -76,7 +76,6 @@
 
 <script setup lang="ts">
 
-
 import { StrapiLocale } from "@nuxtjs/strapi/dist/runtime/types";
 import { ServiceDetail, Service } from "~/types/service";
 
@@ -86,6 +85,8 @@ const { find, findOne } = useStrapi()
 const { id } = useRoute().params as { id: string }
 
 let service_details: ServiceDetail[] = []
+let detail_title: string = ''
+let detail_description: string = ''
 
 try {
   if (!id) {
@@ -98,6 +99,9 @@ try {
       locale: locale.value as StrapiLocale,
       populate: '*'
     })
+
+    detail_title = data.filter((item) => item.attributes.Detail_Titel).map((item) => item.attributes.Detail_Titel)[0]
+    detail_description = data.filter((item) => item.attributes.Detail_Description).map((item) => item.attributes.Detail_Description)[0]
     service_details = data.filter((item) => item.attributes.Title.toLowerCase().includes(id)).map((item) => item.attributes.service_details.data.map((item) => item.attributes))[0]
     if (!service_details) throw createError({ statusCode: 404, statusMessage: 'Page Not Found' })
   }
