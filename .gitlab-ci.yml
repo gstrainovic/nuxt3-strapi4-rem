@@ -31,7 +31,6 @@ deploy:
   script: 
     - |
       cd deploy/$CI_COMMIT_REF_NAME
-      ls -al
       kustomize edit set image DUMMY_IMAGE=$REGISTRY/remmen/redesign:$CI_PIPELINE_ID_$CI_COMMIT_REF_NAME
   artifacts:
     paths:
@@ -49,7 +48,7 @@ git_push:
       git add deploy/$CI_COMMIT_REF_NAME/kustomization.yaml
       if [[ `git commit -a --dry-run -uno --short|wc -l` -gt 0 ]]; then
         git commit -m "Updated version number from  $CI_COMMIT_SHORT_SHA [skip ci]"
-        git remote rm origin && git remote add origin https://foobar:${GIT_TOKEN}@gitlab.herren5.ch/websites/remmen.git
+        git remote rm origin && git remote add origin https://foobar:${GIT_TOKEN}@gitlab.herren5.ch/websites/remmen_redesign.git
       else
         echo "no changes, nothing to commit in this stage"
       fi
